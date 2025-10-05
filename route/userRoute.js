@@ -3,9 +3,9 @@ const { getuser, postUser, login, deleteUser, getuserAdmin } = require("../contr
 const allowAdminOrAuth = require("../middleware/allowAdminOrAuth");
 const isAdmin = require("../middleware/isAdmin");
 const isAuth = require("../middleware/isAuth");
-// const isAuth = require("../middleware/isAuth");
 
-route.get("/", isAdmin, getuserAdmin)
+
+route.get("/admin", isAdmin, getuserAdmin)
 route.get("/", isAuth, getuser)
 route.post("/", postUser)
 route.post("/login", login)
