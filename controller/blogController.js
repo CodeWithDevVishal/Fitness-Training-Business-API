@@ -32,7 +32,7 @@ exports.getBlog = async (req, res) => {
 exports.postBlog = async (req, res) => {
     try {
         const commentData = await Blog.create(req.body)
-        const newBlogData = await Blog.findOne({ _id: data._id }).populate([
+        const newBlogData = await Blog.findOne({ _id: commentData._id }).populate([
             { path: "userRef", select: ["_id", "name"] },
             { path: "categoryRef", select: ["_id", "category"] },
             { path: "commentRef", select: ["_id", "comment", "createdAt"] }

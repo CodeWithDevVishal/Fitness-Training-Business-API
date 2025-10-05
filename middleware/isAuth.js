@@ -8,7 +8,7 @@ const isAuth = async (req, res, next) => {
         if (!verifyToken) return res.status(401).json({ errors: true, message: "unauthenticated request, invalid token" })
         if (verifyToken.role != "user") return res.status(401).json({ errors: true, message: "unauthenticated request, invalid token" })
         next()
-    
+
     } catch (error) {
         return res.status(401).json({ errors: true, message: "unauthenticated request, invalid token" + error.message })
     }   
