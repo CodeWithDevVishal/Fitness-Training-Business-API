@@ -27,7 +27,7 @@ exports.postUser = async (req, res) => {
         if (userExists) return res.status(500).json({ errors: true, message: "user already exists" });
         req.body.password = await bcrypt.hash(req.body.password, 10);
         const data = await User.create(req.body);
-        return res.json({ errors: false, data: { name: data.name, email: data.email } });
+        return res.json({ errors: false, data: { name: data.name, email: data.email, createdAt: data.createdAt } });
     } catch (error) {
         return res.status(500).json({ errors: true, message: error.message });
     }
@@ -42,7 +42,7 @@ exports.login = async (req, res) => {
         if (!verifyPassword) return res.status(500).json({ errors: true, message: "Account not found" });
 
         const token = await jwt.sign({ userId: userExists._id, username: userExists.name, role: userExists.role }, process.env.SEC, { expiresIn: '2h' })
-        return res.json({ errors: false, data: { token: token, user: { name: userExists.name, email: userExists.email } } })
+        return res.json({ errors: false, data: { token: token, user: { name: userExists.name, email: userExists.email, createdAt: userExists.createdAt } } })
     } catch (error) {
         return res.status(500).json({ errors: true, message: error.message });
     }
