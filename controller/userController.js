@@ -4,18 +4,10 @@ const Comment = require("../model/comment");
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken");
 
-exports.getuserAdmin = async (req, res) => {
-    try {
-        const data = await User.find();
-        return res.json({ errors: false, data: data });
-    } catch (error) {
-        return res.status(500).json({ errors: true, message: error.message });
-    }
-}
 exports.getuser = async (req, res) => {
     try {
         const data = await User.find();
-        return res.json({ errors: false, data: { name: data.name, email: data.email, createdAt: data.createdAt } });
+        return res.json({ errors: false, data: data });
     } catch (error) {
         return res.status(500).json({ errors: true, message: error.message });
     }
